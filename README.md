@@ -1,2 +1,2 @@
-# AshEvent
-A simple event system in Python
+# AshEvent  
+A simple ``event system`` in Python
