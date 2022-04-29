@@ -5,12 +5,13 @@ A simple event system in Python
 """
 
 from .event import *
+from .tool import (install_all, install_only, install_module)
 
-__name__ = "ashevent"
-__version__ = "0.2"
+__author__ = "Za08"
+__version__ = "0.3"
 __all__ = [
-    "VERSION", "AUTHOR", "Type", "Event", "EventHandler",
-    "get_function_names", "get_functions", "unsubscribe",
-    "subscribe", "contains_func", "unsubscribe_all",
+    "Type", "Event", "EventHandler", "Priority",
+    "get_function_names", "get_functions", "get_function_containers",
+    "unsubscribe", "subscribe", "contains_func", "clear_event",
     "install_event", "install_only", "install_module", "install_all",
 ]
