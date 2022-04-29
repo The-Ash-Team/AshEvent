@@ -39,6 +39,6 @@ def onMessageReceive(e):
 
 # create the main loop
 if __name__ == "__main__":
-    while (message := input("Enter your message: ")) != "exit" != "quit":
+    while (message := input("Enter your message: ")) != "exit" and message != "quit":
         event = MessageReceiveEvent(message)  # yeah! instantiate our class!
         event.call()  # yeah! use the call() method!
