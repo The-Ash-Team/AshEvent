@@ -4,7 +4,7 @@
 AshEvent implemented a very simple ``event system`` in Python.  
 It works like this:  
 
-You use ``@EventHandler`` to let the below function subscribe to a type of event.  
+You use ``@EventHandler`` to let the function below subscribe to a type of event.  
 Suppose you defined a EventA class that inherits the ``Event`` class we provide.  
 Also, EventA has a custom variable **msg**.  
 You can write something like this:
