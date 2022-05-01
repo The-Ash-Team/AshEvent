@@ -1,4 +1,4 @@
-# AshEvent 0.3
+# AshEvent 0.3.1
 
 ## Introduction
 AshEvent implemented a very simple ``event system`` in Python.  
