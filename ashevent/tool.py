@@ -1,11 +1,14 @@
+from typing import (Any, Callable, List, Union)
+
 ashevent = None if __name__ == "__main__" else __import__("sys").modules["ashevent"]
 
 
 class FunctionContainer:
     """
-    Contain a function and a priority
+    Contains a function and a priority
     """
-    def __init__(self, func, priority):
+
+    def __init__(self, func: Callable[[Any], None], priority):
         self.func = func
         self.priority = priority
 
@@ -15,23 +18,29 @@ class FunctionContainer:
         """
         return self.priority.value
 
-    def exec_func(self, event):
+    def exec_func(self, event: Any):
         """
-        execute the func using the given event as parameter
+        executes the func using the given event as parameter
         """
         self.func(event)
 
-    def __eq__(self, other):
+    def __eq__(self, other: Any):
         if not isinstance(other, FunctionContainer):
             return False
         return self.func is other.func and (self.priority == other.priority or other.priority == -1)
 
 
-def sort_priority(funcs: list[FunctionContainer]):
+def sort_containers(funcs: List[FunctionContainer]):
+    """
+    sort a list by Priority.
+    """
     list.sort(funcs, key=FunctionContainer.get_priority_value)
 
 
-def get_container(funcs, func, no_priority=None):
+def get_container(funcs: List[FunctionContainer], func: Callable[[Any], None], no_priority=None) -> Union[None, FunctionContainer]:
+    """
+    get the container according to the given function and function containers
+    """
     if no_priority is None:
         no_priority = FunctionContainer(func, -1)
     if no_priority not in funcs:
@@ -39,8 +48,12 @@ def get_container(funcs, func, no_priority=None):
     return funcs[funcs.index(no_priority)]
 
 
-def add_func(func, priority, funcs: list[FunctionContainer]):
-    container = FunctionContainer(func, priority)
+def add_func(container: FunctionContainer, funcs: List[FunctionContainer]):
+    """
+    Add a function container into a function container list
+    """
+    func = container.func
+    priority = container.priority
     no_priority = FunctionContainer(func, -1)
     if container in funcs:
         return
@@ -49,13 +62,13 @@ def add_func(func, priority, funcs: list[FunctionContainer]):
     else:
         funcs.append(container)
 
-    sort_priority(funcs)
+    sort_containers(funcs)
 
 
 def install_only(name: str):
     """
     :param name: The name of a function, class, etc. in this module (ashevent).
-    Use the property in any module without importing.
+    Uses the property in any module without importing.
     """
     if __name__ == "__main__":
         raise RuntimeError()
@@ -66,7 +79,7 @@ def install_only(name: str):
 
 def install_module():
     """
-    Use ashevent in any module without importing
+    Uses ashevent in any module without importing
     """
     if __name__ == "__main__":
         raise RuntimeError()
@@ -75,10 +88,9 @@ def install_module():
 
 def install_all():
     """
-    Use all the properties in ashevent in any module without importing
+    Uses all the properties in ashevent in any module without importing
     """
     if __name__ == "__main__":
         raise RuntimeError()
     props = {x: eval("ashevent." + x) for x in ashevent.__all__}
     __import__("builtins").__dict__.update(**props)
-
