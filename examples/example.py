@@ -13,7 +13,7 @@ class MessageReceiveEvent(Event):
 # and also the Event class (yes this is possible I don't know if I should remove this)
 @EventHandler(MessageReceiveEvent, Event)
 def onEvents(e):  # the priority is NORMAL by default.
-    if e.__class__ != MessageReceiveEvent:  # we subscribed to 2 events, so we should check this..
+    if type(e) != MessageReceiveEvent:  # we subscribed to 2 events, so we should check this..
         print("A Event just happened")
         return
     msg = e.msg
