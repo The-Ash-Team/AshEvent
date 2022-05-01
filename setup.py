@@ -13,3 +13,4 @@ setup(
     url="https://github.com/The-Ash-Team/AshEvent", license="MIT",
     packages=find_packages()
 )
+
